@@ -1,0 +1,135 @@
+:root {
+  --colour-main: #202020;
+  --colour-additional: #d8e2dc;
+  --colour-accent: #ffcad4;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  line-height: 1.6;
+  background: var(--colour-additional);
+  font-family: "Lato", sans-serif;
+}
+
+.card {
+  color: var(--colour-main);
+  background-image: url(img/milk.jpg);
+  background-size: cover;
+  padding: 10rem 0 0;
+  max-width: 35ch;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: transform 500ms ease;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: scale(1.05);
+}
+
+.card-content {
+  --padding: 1.5rem;
+  padding: var(--padding);
+  background: linear-gradient(
+    hsl(0 0% 0% / 0),
+    hsl(20 0% 0% / 0.2) 20%,
+    hsl(0 0% 40% / 1)
+  );
+}
+
+.card-title {
+  position: relative;
+  width: max-content;
+  font-weight: 300;
+}
+
+.card-title::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: calc(100% + var(--padding));
+  left: calc(var(--padding) * -1);
+  bottom: 0;
+  background-color: var(--colour-accent);
+  transform-origin: left;
+  transition: transform 500ms ease;
+}
+
+.card:hover .card-title::after,
+.card:focus-within .card-title::after {
+  transform: scaleX(1);
+}
+
+.card-body {
+  color: var(--colour-additional);
+  font-weight: 100;
+}
+
+@media (hover) {
+  .card-content {
+    transform: translateY(67%);
+    transition: transform 500ms ease;
+  }
+
+  .card:hover .card-content,
+  .card:focus-within .card-content {
+    transform: translateY(0);
+    transition-delay: 500ms;
+  }
+
+  .card:focus-within .card-content {
+    transition-duration: 0ms;
+  }
+
+  .card-content > *:not(.card-title) {
+    opacity: 0;
+    transition: opacity 500ms linear;
+  }
+
+  .card:hover .card-content > *:not(.card-title),
+  .card:focus-within .card-content > *:not(.card-title) {
+    opacity: 1;
+    transition-delay: 1000ms;
+  }
+
+  .card-title::after {
+    transform: scaleX(0);
+  }
+}
+
+.button {
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #9d8189;
+  font-weight: 300;
+  background-color: var(--colour-accent);
+  padding: 0.5em 1.25em;
+  border-radius: 0.25rem;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--colour-additional);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
